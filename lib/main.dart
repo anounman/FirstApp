@@ -1,19 +1,17 @@
-import "package:flutter/material.dart"
+import 'package:firstapp/homepage.dart';
+import 'package:firstapp/login_page.dart';
+import "package:flutter/material.dart";
 
-void main(List<String> args) {
+void main() {
   runApp(App());
 }
 
-
-class class App  extends StatelessWidget {
-  
-
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
-        appBar: AppBar(title: Text("First App"),) ,
-        ),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.purple),
+      home: Text("Hello Test"),
     );
   }
 }
