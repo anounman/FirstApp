@@ -1,3 +1,4 @@
+import 'package:firstapp/routes.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -7,6 +8,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String name = "";
+  bool isClicked = false;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -40,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                 onChanged: (value) {
                   name = value;
                   setState(() {});
+                  // Navigator.pushNamed(context, MyRoutes.loginRoute);
                 },
                 decoration: InputDecoration(
                   hintText: "Enter Username",
@@ -56,10 +60,23 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-        AnimatedContainer(
-          duration: Duration(seconds: 1),
-          height: 100,
-          width: 200,
+        InkWell(
+          onTap: () {
+            isClicked = true;
+            setState(() {});
+          },
+          child: AnimatedContainer(
+            duration: Duration(seconds: 1),
+            height: isClicked ? 50 : 150,
+            width: 50,
+            color: Colors.purple,
+            child: Text("Login"),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.purple,
+              shape: isClicked ? BoxShape.circle : BoxShape.rectangle,
+            ),
+          ),
         )
       ],
     ));
