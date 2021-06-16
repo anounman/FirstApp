@@ -1,11 +1,9 @@
-import 'package:firstapp/routes.dart';
+import 'package:firstapp/utils/routes.dart';
 import 'package:flutter/material.dart';
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool isClicked = false;
@@ -40,10 +38,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               TextFormField(
-                onChanged: (value) {
+                onChanged: (value) async {
                   name = value;
                   setState(() {});
-                  // Navigator.pushNamed(context, MyRoutes.loginRoute);
+                  await Future.delayed(Duration(seconds: 1));
+                  await Navigator.pushNamed(context, MyRoutes.homeRoute);
+                  setState(() {
+                    isClicked = false;
+                  });
                 },
                 decoration: InputDecoration(
                   hintText: "Enter Username",
@@ -60,23 +62,16 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-        InkWell(
-          onTap: () {
-            isClicked = true;
-            setState(() {});
-          },
-          child: AnimatedContainer(
-            duration: Duration(seconds: 1),
-            height: isClicked ? 50 : 150,
-            width: 50,
-            color: Colors.purple,
-            child: Text("Login"),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.purple,
-              shape: isClicked ? BoxShape.circle : BoxShape.rectangle,
-            ),
-          ),
+        SizedBox(
+          height: 20,
+        ),
+        AnimatedContainer(
+          duration: Duration(seconds: 1),
+          color: Colors.purple,
+          width: 150,
+          height: 50,
+          child:Center(child: Text("Login" , style: TextStyle(color: Colors.white),), ) 
+        
         )
       ],
     ));
