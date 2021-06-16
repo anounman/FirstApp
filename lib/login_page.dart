@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:firstapp/utils/routes.dart';
 import 'package:flutter/material.dart';
 class LoginPage extends StatefulWidget {
@@ -38,15 +39,10 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               TextFormField(
-                onChanged: (value) async {
+                onChanged: (value)  {
                   name = value;
                   setState(() {});
-                  await Future.delayed(Duration(seconds: 1));
-                  await Navigator.pushNamed(context, MyRoutes.homeRoute);
-                  setState(() {
-                    isClicked = false;
-                  });
-                },
+            },
                 decoration: InputDecoration(
                   hintText: "Enter Username",
                   labelText: "Username",
@@ -65,13 +61,31 @@ class _LoginPageState extends State<LoginPage> {
         SizedBox(
           height: 20,
         ),
-        AnimatedContainer(
-          duration: Duration(seconds: 1),
-          color: Colors.purple,
-          width: 150,
-          height: 50,
-          child:Center(child: Text("Login" , style: TextStyle(color: Colors.white),), ) 
-        
+      Material(
+          color: Colors.purple,       
+          borderRadius: BorderRadius.circular(isClicked?50: 8),
+              child: InkWell(
+              onTap: () async{
+                setState(() {
+                  isClicked = true;
+                });
+                await Future.delayed(Duration(seconds: 1));
+                await Navigator.pushNamed(context, MyRoutes.homeRoute);
+                setState (() {
+                  isClicked = false;
+                });
+                
+              },
+              child: AnimatedContainer(
+              duration: Duration(seconds: 1),
+              width: isClicked?50 : 150,
+              height: 50,
+              child:Center(child: 
+              isClicked?Icon(Icons.done):
+              Text("Login" , style: TextStyle(color: Colors.white),), ) ,
+              
+            ),
+          ),
         )
       ],
     ));
